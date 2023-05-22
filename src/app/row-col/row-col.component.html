@@ -1,0 +1,42 @@
+<div class="rowcol-form m-3 p-4 text-center">
+    <form [formGroup]="rowcolForm">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Number of Rows</mat-label>
+                    <input formControlName="numRows" type=number matInput placeholder="Enter the number of rows in the plot layout?">
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Number of Columns</mat-label>
+                    <input formControlName="numCols" type=number matInput placeholder="Enter the number of columns in the plot layout?">
+                </mat-form-field>
+            </div>
+        </div>
+        <button class="mt-4" mat-raised-button color="primary" (click)="generateLayout()">Generate Plot Layout</button>
+    </form>
+
+    <div class="form container mt-4">
+        <div class="plot-layout text-center" *ngIf="plotLayout">
+            <form [formGroup]="plotForm">
+                <div class="row" *ngFor="let row of plotLayout; let i=index">
+                    <div class="col-md-2" *ngFor="let col of row; let j=index">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Row{{i+1}}-Col{{j+1}}</mat-label>
+                            <mat-select formControlName="{{i}}-{{j}}" multiple>
+                                <mat-option value="House">House</mat-option>
+                                <mat-option value="Restaurant">Restaurant</mat-option>
+                                <mat-option value="Gym">Gym</mat-option>
+                                <mat-option value="Hospital">Hospital</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+    
+            <button (click)="houseRecommend()" class="mt-4" mat-raised-button color="primary">Recommend House</button>
+        </div>
+    </div>
+    
+</div>
